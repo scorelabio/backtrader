@@ -376,6 +376,11 @@ class Strategy(with_metaclass(MetaStrategy, StrategyBase)):
                 elif len(observer):
                     observer.prenext()
             else:
+                if len(self) > len(observer):
+                    if self._oldsync:
+                        observer.advance()
+                    else:
+                        observer.forward()
                 observer._next()
 
     def _next_analyzers(self, minperstatus, once=False):
