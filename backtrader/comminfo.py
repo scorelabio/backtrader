@@ -263,7 +263,9 @@ class CommInfoBase(with_metaclass(MetaParams)):
             return 0.0  # long positions not charged
 
         dt0 = dt.date()
-        dt1 = pos.datetime.date()
+        
+        try: dt1 = pos.datetime.date()
+        except AttributeError: return 0.0
 
         if dt0 <= dt1:
             return 0.0
